@@ -10,8 +10,8 @@ pipeline {
     stages {
         stage('Clone repository') {
             steps {
-                sh 'git clone ${GIT_SOURCE_URL} ${CLONE_FOLDER}'
-                cd '${CLONE_FOLDER}'
+                sh 'git clone $GIT_SOURCE_URL $CLONE_FOLDER '
+                cd '$CLONE_FOLDER'
             }
         }
         stage('DockerHub Login with credentials') {
@@ -34,7 +34,7 @@ pipeline {
         stage('Cleanup') {
             steps {
                 sh 'cd ..'
-                sh 'rm -rf ${CLONE_FOLDER}'
+                sh 'rm -rf $CLONE_FOLDER'
             }
         }
     }
