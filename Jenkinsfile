@@ -15,8 +15,10 @@ pipeline {
             }
         }
         stage('DockerHub Login with credentials') {
-            steps {
-                sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
+            withCredentials([usernamePassword(credentialsId: 'DOCKERHUB_CREDENTIAL', usernameVariable: 'DOCKERHUBUSERNAME', passwordVariable: 'DOCKERHUBPASSWORD')]) {
+                steps {
+                    sh 'docker login -u ${DOCKERHUBUSERNAME} -p ${DOCKERHUBPASSWORD}'
+                }
             }
         }
         stage('Build Docker Container Image from source') {
