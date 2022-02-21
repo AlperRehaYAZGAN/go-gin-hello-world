@@ -8,6 +8,11 @@ pipeline {
         DOCKERHUB_CREDENTIAL = credentials('DOCKERHUB_CREDENTIAL')
     }
     stages {
+        stage('Clear Workspace') {
+            steps {
+                sh 'rm -rf ${CLONE_FOLDER}'
+            }
+        }
         stage('Clone repository') {
             steps {
                 sh '''#!/bin/bash -e
