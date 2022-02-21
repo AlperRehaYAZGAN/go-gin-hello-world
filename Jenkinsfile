@@ -22,6 +22,15 @@ pipeline {
                 '''
             }
         }
+        stage('Check docker version') {
+            steps {
+                sh '''#!/bin/bash -e
+                echo "Checking docker version"
+                docker --version
+                echo "Checking docker version done"
+                '''
+            }
+        }
         stage('DockerHub Login with credentials') {
             steps {
                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'mycreds', usernameVariable: 'DOCKHUBUSERNAME', passwordVariable: 'DOCKHUBPASSWORD']]) {
