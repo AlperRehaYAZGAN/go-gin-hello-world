@@ -5,14 +5,9 @@ pipeline {
         CLONE_FOLDER = "${params.CLONE_FOLDER}"
         IMAGE_NAME = "${params.IMAGE_NAME}"
         IMAGE_TAG = "${params.IMAGE_TAG}"
-        DOCKERHUB_CREDENTIAL = credentials("DOCKERHUB_CREDENTIAL")
+        DOCKERHUB_CREDENTIAL = credentials('DOCKERHUB_CREDENTIAL')
     }
     stages {
-        stage('Clean Workspace') {
-            steps {
-                clearWs()
-            }
-        }
         stage('Clone repository') {
             steps {
                 sh '''#!/bin/bash -e
