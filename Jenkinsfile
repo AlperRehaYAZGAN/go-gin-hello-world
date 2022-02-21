@@ -24,11 +24,13 @@ pipeline {
         }
         stage('DockerHub Login with credentials') {
             steps {
-                sh '''#!/bin/bash -e
-                echo "DockerHub Login with credentials"
-                docker login -u ${DOCKERHUB_CREDENTIAL.username} -p ${DOCKERHUB_CREDENTIAL.password}
-                echo "DockerHub Login with credentials done"
-                '''
+                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'mycreds', usernameVariable: 'DOCKHUBUSERNAME', passwordVariable: 'DOCKHUBPASSWORD']]) {
+                    sh '''#!/bin/bash -e
+                    echo "DockerHub Login with credentials"
+                    docker login -u ${DOCKHUBUSERNAME} -p ${DOCKHUBPASSWORD}
+                    echo "DockerHub Login with credentials done"
+                    '''
+                }
             }
         }
         stage('Build Docker Container Image from source') {
