@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-        label 'docker' 
-    }
+    agent any
     environment {
         GIT_SOURCE_URL = "${params.GIT_SOURCE_URL}"
         CLONE_FOLDER = "${params.CLONE_FOLDER}"
